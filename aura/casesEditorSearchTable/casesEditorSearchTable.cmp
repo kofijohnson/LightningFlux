@@ -1,0 +1,13 @@
+<aura:component >
+	<aura:attribute name="state" type="Object" />
+	<aura:attribute name="searchValues" type="Object" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:registerEvent name="casesEditorDispatcher" type="c:casesEditorDispatcher"/>
+	
+	<!-- Search filters -->
+    <c:casesEditorSearchForm searchValues="{!v.searchValues}" onSearchUpdated="{!c.dispatchSearchCases}" responseDelay="{!1500}"/>
+    <!-- Search Result Table -->
+    <c:casesEditorTable cases="{!v.state.cases}" onCaseSelected="{!c.dispatchSelectCase}"/>
+</aura:component>

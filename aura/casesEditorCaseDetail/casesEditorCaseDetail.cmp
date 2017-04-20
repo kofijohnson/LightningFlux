@@ -1,0 +1,56 @@
+<aura:component >
+	<aura:attribute name="case" type="Object"/>
+
+	<aura:registerEvent name="casesEditorDispatcher" type="c:casesEditorDispatcher"/>
+
+	<div class="slds-form--stacked">
+		<div class="slds-form-element">
+		    <div class="slds-form-element__control">
+		   		<ui:inputText label="Case Number"
+					class="slds-input"
+					labelClass="slds-form-element__label"
+					value="{!v.case.case_number}"
+					disabled="{!true}"
+           		/>
+		    </div>
+		</div>
+		<div class="slds-form-element">
+		    <div class="slds-form-element__control">
+		    	<ui:inputText label="Contact"
+					class="slds-input"
+					labelClass="slds-form-element__label"
+					value="{!v.case.contact}"
+					disabled="{!true}"
+           		/>
+		    </div>
+		</div>
+  		<div class="slds-form-element">
+			<label class="slds-form-element__label" for="selectStatus">Status</label>
+		  	<div class="slds-form-element__control">
+		    	<div class="slds-select_container">
+			      	<ui:inputSelect aura:id="selectStatus" class="slds-select" change="{!c.updateStatus}" disabled="{!or(empty(v.case),empty(v.case.case_number))}">
+					    <ui:inputSelectOption text="New" label="New" value="{!v.case.status == 'New' ? true : false}"/>
+					    <ui:inputSelectOption text="Working" label="Working" value="{!v.case.status == 'Working' ? true : false}"/>
+					    <ui:inputSelectOption text="Escalated" label="Escalated" value="{!v.case.status == 'Escalated' ? true : false}"/>
+					    <ui:inputSelectOption text="Closed" label="Closed" value="{!v.case.status == 'Closed' ? true : false}"/>
+					</ui:inputSelect>
+		    	</div>
+		  	</div>
+		</div>
+		<div class="slds-form-element">
+			<label class="slds-form-element__label" for="selectPriority">Priority</label>
+		  	<div class="slds-form-element__control">
+		    	<div class="slds-select_container">
+			      	<ui:inputSelect aura:id="selectPriority" class="slds-select" change="{!c.updatePriority}" disabled="{!or(empty(v.case),empty(v.case.case_number))}">
+					    <ui:inputSelectOption text="High" label="High" value="{!v.case.priority == 'High' ? true : false}"/>
+					    <ui:inputSelectOption text="Medium" label="Medium" value="{!v.case.priority == 'Medium' ? true : false}"/>
+					    <ui:inputSelectOption text="Low" label="Low" value="{!v.case.priority == 'Low' ? true : false}"/>
+					</ui:inputSelect>
+		    	</div>
+		  	</div>
+		</div>
+		<div class="slds-form-element">
+    		<lightning:button variant="brand" label="Save" onclick="{!c.dispatchUpdateCase}" disabled="{!or(empty(v.case),empty(v.case.case_number))}"/>
+  		</div>
+	</div>
+</aura:component>

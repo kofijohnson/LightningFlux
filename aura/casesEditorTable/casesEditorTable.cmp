@@ -1,0 +1,59 @@
+<aura:component >
+	<aura:attribute name="cases" type="Object" />
+
+    <aura:registerEvent name="onCaseSelected" type="c:casesEditorOnCaseSelected"/>
+
+    <div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-top--large">
+        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--4-of-4 slds-large-size--12-of-12 slds-m-top--large">
+            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Case Number</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Contact">Contact</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Status">Status</div>
+                        </th>
+                         <th scope="col">
+                            <div class="slds-truncate" title="Priority">Priority</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+			    	<aura:iteration items="{!v.cases}" var="currentCase">
+                        <tr>
+                            <td scope="row" data-label="Case Number">
+                                <div class="slds-truncate">
+                                    <ui:outputURL value="#" label="{!currentCase.case_number}" click="{!c.updateSelectedCase}"/>
+                                </div>
+                            </td>
+                            <td scope="row" data-label="Contact">
+                                <div class="slds-truncate">
+                                    {!currentCase.contact}
+                                </div>
+                            </td>
+                            <td scope="row" data-label="Status">
+                                <div class="slds-truncate">
+                                    {!currentCase.status}
+                                </div>
+                            </td>
+                            <td scope="row" data-label="Priority">
+                                <div class="slds-truncate">
+                                    {!currentCase.priority}
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <aura:renderIf isTrue="{!empty(v.cases)}">
+	            <div class="slds-p-horizontal--small slds-m-top--large slds-text-color--default">
+	            	No Case Found...
+	            </div>
+	        </aura:renderIf>
+        </div>
+    </div>
+</aura:component>

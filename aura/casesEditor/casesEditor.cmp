@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global"  controller="CasesEditorCtrl">
+	<aura:attribute name="state" type="Object"/>
+    <ltng:require styles="/resource/SLDS222/assets/styles/salesforce-lightning-design-system.min.css" />
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:handler name="casesEditorDispatcher" event="c:casesEditorDispatcher" action="{!c.handleDispatcherAction}"/>
+    
+    <div class="slds slds-m-around--medium">
+    	<!-- Spinner -->
+		<c:casesEditorSpinner busy="{!v.state.busy}" />
+    	<div class="slds-grid slds-wrap slds-grid--pull-padded slds-m-top--large">
+    		<div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--3-of-6 slds-large-size--7-of-12">
+		        <!--Search Tabe -->
+		        <c:casesEditorSearchTable state="{!v.state}" />
+    		</div>
+    		<div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-6 slds-large-size--1-of-12"></div>
+		    <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--2-of-6 slds-large-size--4-of-12">
+		    	<!-- Detail -->
+				<c:casesEditorCaseDetail case="{!v.state.selectedCase}" />
+		    </div>
+		</div>				
+    </div>
+</aura:component>
